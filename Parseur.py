@@ -1,5 +1,6 @@
 from Plant import Plant
 from Tree import Tree
+from Crop import Crop
 from webcolors import rgb_to_name, CSS3_HEX_TO_NAMES, hex_to_rgb  # python3 -m pip install webcolors
 from scipy.spatial import KDTree
 from collections import defaultdict
@@ -42,13 +43,9 @@ def read(name):
         element = line.strip("\n").split(";")
         form = element[0]# .split(" ")[0]
         color = eval(element[1])#element[0].split(" ")[1]
-
         color = convert_rgb_to_names(color[:3])
-        print(color)
-        if(element[-1] != str(0)):
-            if(dictionnaryForm[form] == "Crop"):
-                plants.append(Plant(dictionnaryColor[color], element[2], element[3]))
-            else:
+        if(dictionnaryForm[form] == "Crop"):
+                plants.append(Crop(dictionnaryColor[color], element[2], element[3]))
+        else:
                 plants.append(Tree(dictionnaryColor[color], element[2], element[3]))
-    print(type(plants[0]))
     return plants

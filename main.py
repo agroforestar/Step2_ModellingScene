@@ -16,7 +16,7 @@ from PIL import Image, ImageShow, ImageDraw, ImageColor
 
 
 ##
-SCENE_SIZE = [15, 15]
+SCENE_SIZE = [12, 12]
 def searchTree(origin: Tree, terrain: np.ndarray) -> list:
     """
     Find the neighbors of a tree
@@ -120,6 +120,7 @@ def drawLine(line : Line, image: ImageDraw):
     for i in range(0, len(points)-1):
         image.line([(points[i].X,points[i].Y ), (points[i+1].X,points[i+1].Y )], (125,125,125), 1)
         image.point((points[i].X,points[i].Y ),(0,125,125) )
+        image.point((points[i+1].X, points[i+1].Y), (0, 125, 125))
 
 
 def expandCrop(crops : list, image, imageW: ImageDraw):
@@ -140,19 +141,21 @@ def getVoisins(xy):
     voisin = []
     if xy[0] >0:
         voisin.append([xy[0]-1, xy[1]])
-        if xy[0]<SCENE_SIZE[0]-1:
+        if xy[1] < SCENE_SIZE[1] - 1:
+            voisin.append([xy[0] - 1, xy[1] + 1])
+    if xy[0]<SCENE_SIZE[0]-1:
             voisin.append([xy[0]+1, xy[1]])
-        if xy[1]<SCENE_SIZE[1]-1:
-            voisin.append([xy[0]-1, xy[1]+1])
+
     if xy[0] >0 and xy[1] >0:
         voisin.append([xy[0] - 1, xy[1]- 1])
-        if xy[0] < SCENE_SIZE[0]-1:
-           voisin.append([xy[0] + 1, xy[1] - 1])
-        if xy[0] < SCENE_SIZE[0]-1 and xy[1]< SCENE_SIZE[1]-1:
+
+    if xy[0] < SCENE_SIZE[0]-1 and xy[1]< SCENE_SIZE[1]-1:
             voisin.append( [xy[0]+1, xy[1]+1])
     if xy[1] >0:
         voisin.append([xy[0] , xy[1]-1])
-        if xy[1]<SCENE_SIZE[1]-1:
+        if xy[0] < SCENE_SIZE[0]-1:
+           voisin.append([xy[0] + 1, xy[1] - 1])
+    if xy[1]<SCENE_SIZE[1]-1:
             voisin.append([xy[0], xy[1]+1])
 
     return voisin
