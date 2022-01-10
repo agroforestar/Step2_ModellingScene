@@ -1,9 +1,9 @@
 # Step2_ModellingScene
 ## Require
-Python 3.X
-- igraph
-- PIL 
-- numpy
+Python 3.9
+- Igraph 0.9.8 : https://igraph.org/
+- PIL 8.4 : https://pillow.readthedocs.io/en/stable/#
+ 
 ## Input 
 File : **data.txt**
 
