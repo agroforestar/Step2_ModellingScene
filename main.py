@@ -11,10 +11,12 @@ from igraph import *
 
 from Parseur import *
 from Line import *
-from PIL import Image, ImageShow, ImageDraw
+from Crop import *
+from PIL import Image, ImageShow, ImageDraw, ImageColor
 
 
 ##
+SCENE_SIZE = [15, 15]
 def searchTree(origin: Tree, terrain: np.ndarray) -> list:
     """
     Find the neighbors of a tree
@@ -88,7 +90,6 @@ def findLines(listTree: list, terrain: np.ndarray) -> list[list]:
                         added = True
                 if (not added):
                     lines.append([tree, voisin])
-    print("lignes", lines)
     return lines
 
 
@@ -101,7 +102,7 @@ def Affichage(graph: Graph):
 
 
 def Createscene(scene: list):
-    visu = Image.new("RGB", (365, 365))
+    visu = Image.new("RGB", SCENE_SIZE)
     modify = ImageDraw.Draw(visu)
     for element in scene:
         if type(element) == Tree:
@@ -114,33 +115,91 @@ def Createscene(scene: list):
     visu.resize((500, 500), Image.NEAREST).show()
 
 
+def drawLine(line : Line, image: ImageDraw):
+    points = sorted(tuple(line.points), key=lambda k: [k.X, k.Y])
+    for i in range(0, len(points)-1):
+        image.line([(points[i].X,points[i].Y ), (points[i+1].X,points[i+1].Y )], (125,125,125), 1)
+        image.point((points[i].X,points[i].Y ),(0,125,125) )
+
+
+def expandCrop(crops : list, image, imageW: ImageDraw):
+    for c in crops:
+        voisin = [[c.X-1, c.Y-1],[c.X, c.Y-1],[c.X+1, c.Y-1],
+                  [c.X-1, c.Y],  [c.X, c.Y],  [c.X+1, c.Y],
+                  [c.X-1, c.Y+1],[c.X, c.Y+1],[c.X+1, c.Y+1]]
+        while len(voisin) >0:
+            v = voisin.pop()
+            if image.getpixel((v[0], v[1])) == (0,0,0):
+                color(v, (125, 125, 0), imageW)
+                new = getVoisins(v)
+                for n in new:
+                    voisin.append(n)
+
+
+def getVoisins(xy):
+    voisin = []
+    if xy[0] >0:
+        voisin.append([xy[0]-1, xy[1]])
+        if xy[0]<SCENE_SIZE[0]-1:
+            voisin.append([xy[0]+1, xy[1]])
+        if xy[1]<SCENE_SIZE[1]-1:
+            voisin.append([xy[0]-1, xy[1]+1])
+    if xy[0] >0 and xy[1] >0:
+        voisin.append([xy[0] - 1, xy[1]- 1])
+        if xy[0] < SCENE_SIZE[0]-1:
+           voisin.append([xy[0] + 1, xy[1] - 1])
+        if xy[0] < SCENE_SIZE[0]-1 and xy[1]< SCENE_SIZE[1]-1:
+            voisin.append( [xy[0]+1, xy[1]+1])
+    if xy[1] >0:
+        voisin.append([xy[0] , xy[1]-1])
+        if xy[1]<SCENE_SIZE[1]-1:
+            voisin.append([xy[0], xy[1]+1])
+
+    return voisin
+
+
+
+def color(xy : tuple, color, image : ImageDraw):
+    image.point(xy, color)
+
 if __name__ == '__main__':
-    scene = read("D:/Mes_Documents/code/OpenCVc++/data.txt")
-    image = np.ndarray((365, 365), dtype=Plant)
+    scene = read("data.txt") #D:/Mes_Documents/code/OpenCVc++/data.txt
+    image = np.ndarray(SCENE_SIZE, dtype=Plant)
+    model = Image.new("RGB", SCENE_SIZE)
+    modelWrite = ImageDraw.Draw(model)
+    colorDict = {"Tree": (0,255,0)}
     listTree = list()
     #
     for i in range(len(scene)):
         if type(scene[i]) == Tree:
             image[scene[i].X, scene[i].Y] = scene[i]
+            modelWrite.point([scene[i].X, scene[i].Y],(0, 255, 0))
             listTree.append(scene[i])
         else:
             image[scene[i].X, scene[i].Y] = scene[i]
-    print(image)
     lines = findLines(listTree, image)
+
+
     for line in lines:
-        scene.append(Line(line))
-    Createscene(scene)
-
-    ###### Création graphe
-    g = Graph()
-    lines = [element for element in scene if type(element) == Line]
-    g.add_vertices(len(scene))
-    g.vs["name"] = "Line"
-    for l in range(len(lines)):
-        index = [g.vcount(), g.vcount() + len(lines[l].points)]
-        g.add_vertices(len(lines[l].points))
-
-        for i in range(index[0], index[1]):
-            print(l, i)
-            g.add_edge(l, i)
-    Affichage(g)
+        line = Line(line)
+        scene.append(line)
+        drawLine(line, modelWrite)
+    model.resize((500, 500), Image.NEAREST).show()
+    expandCrop([element for element in scene if type(element) == Crop], model, modelWrite)
+    model.resize((500, 500), Image.NEAREST).show()
+    print("end")
+    # Createscene(scene)
+    #
+    # ###### Création graphe
+    # g = Graph()
+    # lines = [element for element in scene if type(element) == Line]
+    # g.add_vertices(len(scene))
+    # g.vs["name"] = "Line"
+    # for l in range(len(lines)):
+    #     index = [g.vcount(), g.vcount() + len(lines[l].points)]
+    #     g.add_vertices(len(lines[l].points))
+    #
+    #     for i in range(index[0], index[1]):
+    #         print(l, i)
+    #         g.add_edge(l, i)
+    # Affichage(g)
