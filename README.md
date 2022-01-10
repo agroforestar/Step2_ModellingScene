@@ -5,7 +5,11 @@ Python 3.X
 - PIL 
 - numpy
 ## Input 
-  data.txt (modifier chemin dans le code) 
-data.txt contient la liste des marqueurs posés sous la forme : nomForme; (B, G, R, A); X, Y
+File : **data.txt**
 
-## 
+Format : Form;(B, G, R);X;Y
+
+## Output (not developped yet)
+File : **out.txt**
+
+Format : Form;(B, G, R);X;Y
