@@ -6,5 +6,6 @@ class Line:
         self.witdh = 2
         vector = [listPoints[-1].X - listPoints[0].X,
                 listPoints[-1].Y - listPoints[0].Y]
-        self.lenght = vector / np.linalg.norm(vector)
+        self.length = vector / np.linalg.norm(vector)
         self.points = listPoints
+        self.color = (255,0,0)

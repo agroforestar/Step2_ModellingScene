@@ -8,16 +8,20 @@ import numpy as np
 import pandas as pd
 
 from igraph import *
+from PIL import Image, ImageShow, ImageDraw, ImageColor
+import _ctypes
 
 from Parseur import *
-from Line import *
 from Crop import *
-from PIL import Image, ImageShow, ImageDraw, ImageColor
+from Model import *
+from Line import *
+
 
 
 ##
 SCENE_SIZE = [12, 12]
-def searchTree(origin: Tree, terrain: np.ndarray) -> list:
+
+def searchTree(origin: Tree, terrain: np.array) -> list:
     """
     Find the neighbors of a tree
     :param origin: tree of interest
@@ -26,10 +30,10 @@ def searchTree(origin: Tree, terrain: np.ndarray) -> list:
     """
     buffer = 3
     listTree = []
-    for i in range(max(0, origin.X - buffer), min(origin.X + buffer + 1, terrain.shape[1])):
-        for j in range(max(0, origin.Y - buffer), min(origin.Y + buffer + 1, terrain.shape[1])):
-            if type(terrain[i, j]) == Tree and (i != origin.X or j != origin.Y):
-                listTree.append(terrain[i, j])
+    for i in range(max(0, origin.X - buffer), min(origin.X + buffer + 1, terrain.size[0])):
+        for j in range(max(0, origin.Y - buffer), min(origin.Y + buffer + 1, terrain.size[1])):
+            if type(terrain.raster[i, j]) == Tree and (i != origin.X or j != origin.Y):
+                listTree.append(terrain.raster[i, j])
     return listTree
 
 
@@ -62,7 +66,7 @@ def isInLine(line: list, newTree: Tree) -> bool:
         return False
 
 
-def findLines(listTree: list, terrain: np.ndarray) -> list[list]:
+def findLines(listTree: list, terrain: np.array) -> list[list]:
     traitedTree = list()
     lines = list()
     for tree in listTree:
@@ -101,20 +105,6 @@ def Affichage(graph: Graph):
     plot(graph, bbox=(300, 300), margin=20)
 
 
-def Createscene(scene: list):
-    visu = Image.new("RGB", SCENE_SIZE)
-    modify = ImageDraw.Draw(visu)
-    for element in scene:
-        if type(element) == Tree:
-            modify.point([element.X, element.Y], (0, 128, 0))
-        elif type(element) == Line:
-            element.points = sorted(element.points, key=lambda k: [k.X, k.Y])
-            modify.line([(element.points[0].X, element.points[0].Y), (element.points[-1].X, element.points[-1].Y)])
-        else:
-            modify.point([element.X, element.Y], (128, 0, 0))
-    visu.resize((500, 500), Image.NEAREST).show()
-
-
 def drawLine(line : Line, image: ImageDraw):
     points = sorted(tuple(line.points), key=lambda k: [k.X, k.Y])
     for i in range(0, len(points)-1):
@@ -123,15 +113,15 @@ def drawLine(line : Line, image: ImageDraw):
         image.point((points[i+1].X, points[i+1].Y), (0, 125, 125))
 
 
-def expandCrop(crops : list, image, imageW: ImageDraw):
+def expandCrop(crops : list, image):
     for c in crops:
         voisin = [[c.X-1, c.Y-1],[c.X, c.Y-1],[c.X+1, c.Y-1],
                   [c.X-1, c.Y],  [c.X, c.Y],  [c.X+1, c.Y],
                   [c.X-1, c.Y+1],[c.X, c.Y+1],[c.X+1, c.Y+1]]
         while len(voisin) >0:
             v = voisin.pop()
-            if image.getpixel((v[0], v[1])) == (0,0,0):
-                color(v, (125, 125, 0), imageW)
+            if image.raster[v[0], v[1]] == 0:
+                image.raster[v[0], v[1]] = c
                 new = getVoisins(v)
                 for n in new:
                     voisin.append(n)
@@ -157,42 +147,30 @@ def getVoisins(xy):
            voisin.append([xy[0] + 1, xy[1] - 1])
     if xy[1]<SCENE_SIZE[1]-1:
             voisin.append([xy[0], xy[1]+1])
-
     return voisin
 
 
-
-def color(xy : tuple, color, image : ImageDraw):
-    image.point(xy, color)
-
 if __name__ == '__main__':
-    scene = read("data.txt") #D:/Mes_Documents/code/OpenCVc++/data.txt
-    image = np.ndarray(SCENE_SIZE, dtype=Plant)
-    model = Image.new("RGB", SCENE_SIZE)
-    modelWrite = ImageDraw.Draw(model)
-    colorDict = {"Tree": (0,255,0)}
+    elementInScene = read("data.txt") #D:/Mes_Documents/code/OpenCVc++/data.txt argument
+
+    image = Model(SCENE_SIZE)
     listTree = list()
-    #
-    for i in range(len(scene)):
-        if type(scene[i]) == Tree:
-            image[scene[i].X, scene[i].Y] = scene[i]
-            modelWrite.point([scene[i].X, scene[i].Y],(0, 255, 0))
-            listTree.append(scene[i])
-        else:
-            image[scene[i].X, scene[i].Y] = scene[i]
+
+    #Import scene in model (raster)
+    for i in range(len(elementInScene)):
+        image.addPointInRaster(elementInScene[i])
+        if type(elementInScene[i]) == Tree:
+            listTree.append(elementInScene[i])
     lines = findLines(listTree, image)
-
-
     for line in lines:
         line = Line(line)
-        scene.append(line)
-        drawLine(line, modelWrite)
-    model.resize((500, 500), Image.NEAREST).show()
-    expandCrop([element for element in scene if type(element) == Crop], model, modelWrite)
-    model.resize((500, 500), Image.NEAREST).show()
-    print("end")
-    # Createscene(scene)
-    #
+        image.addLineInRaster(line)
+
+
+    expandCrop([element for element in elementInScene if type(element) == Crop], image)
+    image.visual.colorRepresentation(image.raster)
+    print(image)
+
     # ###### Création graphe
     # g = Graph()
     # lines = [element for element in scene if type(element) == Line]
