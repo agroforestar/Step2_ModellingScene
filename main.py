@@ -7,7 +7,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 
-from igraph import *
 from PIL import Image, ImageShow, ImageDraw, ImageColor
 import _ctypes
 
@@ -151,7 +150,7 @@ def getVoisins(xy):
 
 
 if __name__ == '__main__':
-    elementInScene = read("data.txt") #D:/Mes_Documents/code/OpenCVc++/data.txt argument
+    elementInScene = readInputFile("data.txt") #D:/Mes_Documents/code/OpenCVc++/data.txt argument
 
     image = Model(SCENE_SIZE)
     listTree = list()
@@ -171,9 +170,10 @@ if __name__ == '__main__':
     image.visual.colorRepresentation(image.raster)
     print(image)
 
-    # ###### Création graphe
-    # g = Graph()
-    # lines = [element for element in scene if type(element) == Line]
+    ###### Création graphe
+    image.createGraph()
+
+        # lines = [element for element in scene if type(element) == Line]
     # g.add_vertices(len(scene))
     # g.vs["name"] = "Line"
     # for l in range(len(lines)):
@@ -183,4 +183,4 @@ if __name__ == '__main__':
     #     for i in range(index[0], index[1]):
     #         print(l, i)
     #         g.add_edge(l, i)
-    # Affichage(g)
+    Affichage(image.g)

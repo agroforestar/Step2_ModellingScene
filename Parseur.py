@@ -36,7 +36,7 @@ def convert_rgb_to_names(rgb_tuple):
             name = closest_colour((int(rgb_tuple[2]),int(rgb_tuple[1]),int(rgb_tuple[0])))
         return name
 
-def read(name):
+def readInputFile(name):
     fichier = open(name, "r")
     plants = list()
     for line in fichier:

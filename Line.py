@@ -9,3 +9,6 @@ class Line:
         self.length = vector / np.linalg.norm(vector)
         self.points = listPoints
         self.color = (255,0,0)
+
+    def __repr__(self):
+        return "Line"

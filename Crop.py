@@ -6,4 +6,4 @@ class Crop(Plant):
         self.color = (0,125,125)
 
     def __repr__(self):
-        return repr((self.X, self.Y))
+        return "Crop"
