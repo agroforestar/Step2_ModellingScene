@@ -1,25 +1,15 @@
-# This is a sample Python script.
-import math
-import time
-
-import matplotlib
-import matplotlib.pyplot as plt
-import numpy as np
-import pandas as pd
-
-from PIL import Image, ImageShow, ImageDraw, ImageColor
-import _ctypes
-
+### Librairies in the projects
 from Parseur import *
 from Crop import *
 from Model import *
 from Line import *
 
-
-
-##
+## Constante
 SCENE_SIZE = [12, 12]
 
+
+## Methods
+###Methods for the lines creation
 def searchTree(origin: Tree, terrain: np.array) -> list:
     """
     Find the neighbors of a tree
@@ -36,16 +26,13 @@ def searchTree(origin: Tree, terrain: np.array) -> list:
     return listTree
 
 
-def createLine(origin: Tree, terrain: np.ndarray, traitedTree: list, voisins=None):
-    if voisins == []:
-        return origin
-    else:
-        traitedTree.append(origin)
-        voisins = searchTree(origin, terrain)
-        createLine(voisins)
-
-
 def isInLine(line: list, newTree: Tree) -> bool:
+    """
+    Test si l'arbre qu'on veut ajouté peut appartenir à la ligne (condition de distance et d'angle respectées)
+    :param line: la ligne concernée
+    :param newTree: l'arbre potentiel
+    :return: Vrai si l'arbre appartient à la ligne, Faux sinon
+    """
     temp_line = line.copy()
     temp_line.append(newTree)
     temp_line = sorted(temp_line, key=lambda element: element.X)
@@ -66,6 +53,12 @@ def isInLine(line: list, newTree: Tree) -> bool:
 
 
 def findLines(listTree: list, terrain: np.array) -> list[list]:
+    """
+    Retourne toutes les lignes formées par la arbres présents dans la scène
+    :param listTree: arbres de la scène
+    :param terrain: modèle contenant la scène
+    :return: liste des lignes trouvées
+    """
     traitedTree = list()
     lines = list()
     for tree in listTree:
@@ -96,6 +89,9 @@ def findLines(listTree: list, terrain: np.array) -> list[list]:
     return lines
 
 
+### Methods for graphe
+
+####TODO : transfert in model class
 def Affichage(graph: Graph):
     graph.vs["label"] = graph.vs["name"]
     color_dict = {"Tree": "blue", "IUGRE": "Forestgreen", "Crop": "yellow", "Line": "darkgreen", "Banc": "brown",
@@ -104,20 +100,19 @@ def Affichage(graph: Graph):
     plot(graph, bbox=(300, 300), margin=20)
 
 
-def drawLine(line : Line, image: ImageDraw):
-    points = sorted(tuple(line.points), key=lambda k: [k.X, k.Y])
-    for i in range(0, len(points)-1):
-        image.line([(points[i].X,points[i].Y ), (points[i+1].X,points[i+1].Y )], (125,125,125), 1)
-        image.point((points[i].X,points[i].Y ),(0,125,125) )
-        image.point((points[i+1].X, points[i+1].Y), (0, 125, 125))
-
-
-def expandCrop(crops : list, image):
+###Methods for the crops creation
+def expandCrop(crops: list, image: Model):
+    """
+    Pour chaque marqueurs culture, la méthodes cherches les pixels adjacants et ajoutent leur appartenance à la culture
+    Recommence pour chaque pixel appartenant à la culture
+    :param crops: marqueurs de culture
+    :param image: modele contenant la scène (cf class Model)
+    """
     for c in crops:
-        voisin = [[c.X-1, c.Y-1],[c.X, c.Y-1],[c.X+1, c.Y-1],
-                  [c.X-1, c.Y],  [c.X, c.Y],  [c.X+1, c.Y],
-                  [c.X-1, c.Y+1],[c.X, c.Y+1],[c.X+1, c.Y+1]]
-        while len(voisin) >0:
+        voisin = [[c.X - 1, c.Y - 1], [c.X, c.Y - 1], [c.X + 1, c.Y - 1],
+                  [c.X - 1, c.Y], [c.X, c.Y], [c.X + 1, c.Y],
+                  [c.X - 1, c.Y + 1], [c.X, c.Y + 1], [c.X + 1, c.Y + 1]]
+        while len(voisin) > 0:
             v = voisin.pop()
             if image.raster[v[0], v[1]] == 0:
                 image.raster[v[0], v[1]] = c
@@ -126,46 +121,51 @@ def expandCrop(crops : list, image):
                     voisin.append(n)
 
 
-def getVoisins(xy):
+def getVoisins(xy) -> list:
+    """
+    Retourne les voisins d'un pixel donné
+    :param xy: coordonnées x et y
+    :return: liste des voisins
+    TODO: Réécrire de manière propre et opti
+    """
     voisin = []
-    if xy[0] >0:
-        voisin.append([xy[0]-1, xy[1]])
+    if xy[0] > 0:
+        voisin.append([xy[0] - 1, xy[1]])
         if xy[1] < SCENE_SIZE[1] - 1:
             voisin.append([xy[0] - 1, xy[1] + 1])
-    if xy[0]<SCENE_SIZE[0]-1:
-            voisin.append([xy[0]+1, xy[1]])
+    if xy[0] < SCENE_SIZE[0] - 1:
+        voisin.append([xy[0] + 1, xy[1]])
 
-    if xy[0] >0 and xy[1] >0:
-        voisin.append([xy[0] - 1, xy[1]- 1])
+    if xy[0] > 0 and xy[1] > 0:
+        voisin.append([xy[0] - 1, xy[1] - 1])
 
-    if xy[0] < SCENE_SIZE[0]-1 and xy[1]< SCENE_SIZE[1]-1:
-            voisin.append( [xy[0]+1, xy[1]+1])
-    if xy[1] >0:
-        voisin.append([xy[0] , xy[1]-1])
-        if xy[0] < SCENE_SIZE[0]-1:
-           voisin.append([xy[0] + 1, xy[1] - 1])
-    if xy[1]<SCENE_SIZE[1]-1:
-            voisin.append([xy[0], xy[1]+1])
+    if xy[0] < SCENE_SIZE[0] - 1 and xy[1] < SCENE_SIZE[1] - 1:
+        voisin.append([xy[0] + 1, xy[1] + 1])
+    if xy[1] > 0:
+        voisin.append([xy[0], xy[1] - 1])
+        if xy[0] < SCENE_SIZE[0] - 1:
+            voisin.append([xy[0] + 1, xy[1] - 1])
+    if xy[1] < SCENE_SIZE[1] - 1:
+        voisin.append([xy[0], xy[1] + 1])
     return voisin
 
 
+## Main
+# command : python3 main.py InputFile.txt
 if __name__ == '__main__':
-    elementInScene = readInputFile("data.txt") #D:/Mes_Documents/code/OpenCVc++/data.txt argument
-
+    elementInScene = readInputFile(sys.argv[1])
     image = Model(SCENE_SIZE)
-    listTree = list()
 
-    #Import scene in model (raster)
-    for i in range(len(elementInScene)):
+    nbElement = len(elementInScene)
+    # Import elements in model (raster)
+    for i in range(nbElement):
         image.addPointInRaster(elementInScene[i])
-        if type(elementInScene[i]) == Tree:
-            listTree.append(elementInScene[i])
-    lines = findLines(listTree, image)
+    ####Traitement des lignes
+    lines = findLines([element for element in elementInScene if type(element) == Tree], image)
     for line in lines:
         line = Line(line)
         image.addLineInRaster(line)
-
-
+    ###Traitement des culture
     expandCrop([element for element in elementInScene if type(element) == Crop], image)
     image.visual.colorRepresentation(image.raster)
     print(image)
@@ -173,9 +173,6 @@ if __name__ == '__main__':
     ###### Création graphe
     image.createGraph()
 
-        # lines = [element for element in scene if type(element) == Line]
-    # g.add_vertices(len(scene))
-    # g.vs["name"] = "Line"
     # for l in range(len(lines)):
     #     index = [g.vcount(), g.vcount() + len(lines[l].points)]
     #     g.add_vertices(len(lines[l].points))

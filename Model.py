@@ -13,6 +13,15 @@ class Model:
 
 
     def bresenhamAlgorithm(self, x1, x2, y1, y2, newObject):
+        """
+        Coloris un pixel s'il est dans le tracé de la ligne entre deux points
+        Pour plus de détail sur l'algorithme : https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm
+        :param x1: coordonée x du premier point
+        :param x2: coordonée x du deuxième point
+        :param y1: coordonée y du premier point
+        :param y2: coordonée y du deuxième point
+        :param newObject: la ligne auxquelle appartiennent les points
+        """
         m_new = 2 * (y2 - y1)
         slope_error_new = m_new - (x2 - x1)
         y = y1
@@ -27,6 +36,10 @@ class Model:
                 slope_error_new = slope_error_new - 2 * (x2 - x1)
 
     def addLineInRaster(self, newObject: Line):
+        """
+        Ajoute une ligne à la représentation raster de la scène
+        :param newObject: la ligne à ajouter
+        """
         points = sorted(newObject.points, key=lambda k: [k.X, k.Y])
         for i in range(len(points) - 1):
             x1 = points[i].X
@@ -46,6 +59,10 @@ class Model:
                 self.bresenhamAlgorithm(x1, x2, y1, y2, newObject)
 
     def addPointInRaster(self, newObject):
+        """
+        Ajoute un objet dont la taille correspond à un pixel à la représentation raster de la scène
+        :param newObject: l'objet à ajouter
+        """
         self.raster[newObject.X, newObject.Y] = newObject
 
     def createGraph(self):
@@ -57,7 +74,6 @@ class Model:
                     else:
                         for element in self.raster[i, j]:
                             self.addVertice({"name":repr(element), "x":element.X, "y": element.Y})
-        print(self.g.vs.get_attribute_values("name"))
 
     def addVertice(self, attributes : dict):
         if not self.has_node(attributes):
