@@ -5,7 +5,8 @@ from Model import *
 from Line import *
 
 ## Constante
-SCENE_SIZE = [12, 12]
+# Hypothèse : 1 pixel = 1m
+SCENE_SIZE = [20, 31]
 
 
 ## Methods
@@ -17,7 +18,7 @@ def searchTree(origin: Tree, terrain: np.array) -> list:
     :param terrain: scene with other trees
     :return: a list of trees in the neighborhood of origin
     """
-    buffer = 3
+    buffer = 4
     listTree = []
     for i in range(max(0, origin.X - buffer), min(origin.X + buffer + 1, terrain.size[0])):
         for j in range(max(0, origin.Y - buffer), min(origin.Y + buffer + 1, terrain.size[1])):
@@ -35,7 +36,7 @@ def isInLine(line: list, newTree: Tree) -> bool:
     """
     temp_line = line.copy()
     temp_line.append(newTree)
-    temp_line = sorted(temp_line, key=lambda element: element.X)
+    temp_line = sorted(temp_line, key=lambda element: element.Y)
     vector_1 = [temp_line[(len(line) / 2).__floor__()].X - temp_line[0].X,
                 line[(len(line) / 2).__floor__()].Y - temp_line[0].Y]
     vector_2 = [temp_line[-1].X - temp_line[(len(line) / 2).__floor__()].X,
@@ -44,7 +45,6 @@ def isInLine(line: list, newTree: Tree) -> bool:
     unit_vector_2 = vector_2 / np.linalg.norm(vector_2)
 
     dot_product = np.dot(unit_vector_1, unit_vector_2)
-
     angle = math.degrees(np.arccos(dot_product))
     if angle < 25:
         return True
@@ -86,6 +86,7 @@ def findLines(listTree: list, terrain: np.array) -> list[list]:
                         added = True
                 if (not added):
                     lines.append([tree, voisin])
+    print(lines)
     return lines
 
 
@@ -93,11 +94,12 @@ def findLines(listTree: list, terrain: np.array) -> list[list]:
 
 ####TODO : transfert in model class
 def Affichage(graph: Graph):
+    layout = graph.layout("kk")
     graph.vs["label"] = graph.vs["name"]
     color_dict = {"Tree": "blue", "IUGRE": "Forestgreen", "Crop": "yellow", "Line": "darkgreen", "Banc": "brown",
                   "Plant": "darkgreen", None: "grey"}
     graph.vs["color"] = [color_dict[name] for name in graph.vs["name"]]
-    plot(graph, bbox=(300, 300), margin=20)
+    plot(graph, layout=layout)
 
 
 ###Methods for the crops creation
@@ -126,29 +128,20 @@ def getVoisins(xy) -> list:
     Retourne les voisins d'un pixel donné
     :param xy: coordonnées x et y
     :return: liste des voisins
-    TODO: Réécrire de manière propre et opti
     """
+    startPosX = max(xy[0] - 1, 0)
+
+    startPosY = max(xy[1] - 1, 0)
+
+    endPosX = min(xy[0] + 1, SCENE_SIZE[0])
+
+    endPosY = min(xy[1] + 1, SCENE_SIZE[1])
+
     voisin = []
-    if xy[0] > 0:
-        voisin.append([xy[0] - 1, xy[1]])
-        if xy[1] < SCENE_SIZE[1] - 1:
-            voisin.append([xy[0] - 1, xy[1] + 1])
-    if xy[0] < SCENE_SIZE[0] - 1:
-        voisin.append([xy[0] + 1, xy[1]])
-
-    if xy[0] > 0 and xy[1] > 0:
-        voisin.append([xy[0] - 1, xy[1] - 1])
-
-    if xy[0] < SCENE_SIZE[0] - 1 and xy[1] < SCENE_SIZE[1] - 1:
-        voisin.append([xy[0] + 1, xy[1] + 1])
-    if xy[1] > 0:
-        voisin.append([xy[0], xy[1] - 1])
-        if xy[0] < SCENE_SIZE[0] - 1:
-            voisin.append([xy[0] + 1, xy[1] - 1])
-    if xy[1] < SCENE_SIZE[1] - 1:
-        voisin.append([xy[0], xy[1] + 1])
+    for rowNum in range(startPosX, endPosX):
+        for colNum in range(startPosY, endPosY):
+            voisin.append([rowNum, colNum])
     return voisin
-
 
 ## Main
 # command : python3 main.py InputFile.txt
@@ -168,7 +161,7 @@ if __name__ == '__main__':
     ###Traitement des culture
     expandCrop([element for element in elementInScene if type(element) == Crop], image)
     image.visual.colorRepresentation(image.raster)
-    print(image)
+  #  print(image)
 
     ###### Création graphe
     image.createGraph()

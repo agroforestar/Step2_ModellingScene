@@ -65,7 +65,42 @@ class Model:
         """
         self.raster[newObject.X, newObject.Y] = newObject
 
+    def getVoisins(self, xy) -> list:
+        """
+        Retourne les voisins d'un pixel donné
+        :param xy: coordonnées x et y
+        :return: liste des voisins
+        """
+
+        startPosX = max(xy[0] - 1, 0)
+        startPosY = max(xy[1] - 1, 0)
+        endPosX = min(xy[0] + 1, self.size[0])
+        endPosY = min(xy[1] + 1, self.size[1])
+
+        voisin = []
+        for rowNum in range(startPosX,endPosX) :
+            for colNum in range(startPosY,endPosY):
+                if rowNum == xy[0] and colNum== xy[1]:
+                    pass
+                else:
+                    if type(self.raster[rowNum, colNum]) != int:
+                        if type(self.raster[rowNum, colNum]) !=list:
+                            voisin.append(self.raster[rowNum, colNum])
+                        else:
+                            for element in self.raster[rowNum, colNum]:
+                                voisin.append(element)
+        return voisin
+
+## Graph methods
     def createGraph(self):
+        self.createVertices()
+        for v in self.g.vs:
+            if v["name"] == "Line":
+                print(v["name"]+ " x : "+str(v["x"])+" y:"+str(v["y"]))
+        self.createEdges()
+
+
+    def createVertices(self):
         for i in range(self.size[0]):
             for j in range(self.size[1]):
                 if self.raster[i, j] != 0:
@@ -80,12 +115,23 @@ class Model:
             name = attributes.pop('name')
             self.g.add_vertices(name, attributes)
 
+
+    def createEdges(self):
+        for vertice in self.g.vs:
+            voisins = self.getVoisins(([vertice["x"],vertice["y"]]))
+            for v in voisins:
+                if v != 0:
+                    dest = self.g.vs.find(x=v.X, y= v.Y)
+                    self.g.add_edges([(vertice, dest)], {"adjacene" : True})
+
     def has_node(self, attributes):
-        try:
-            self.g.vs.find(name=attributes["name"], x= attributes['x'], y= attributes['y'])
-        except:
-            return False
-        return True
+        if self.g.vcount() >0:
+            rep = self.g.vs.select(name_eq=attributes["name"], x_eq= attributes["x"], y_eq= attributes["y"])
+            if len(rep) >0 :
+                return True
+            else:
+                return False
+
 
     def __repr__(self):
         self.visual.printRepresentation()
