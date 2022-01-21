@@ -2,6 +2,7 @@ from igraph import *
 
 from Representation import *
 from Line import *
+from Tree import *
 
 
 class Model:
@@ -118,11 +119,31 @@ class Model:
 
     def createEdges(self):
         for vertice in self.g.vs:
-            voisins = self.getVoisins(([vertice["x"],vertice["y"]]))
-            for v in voisins:
-                if v != 0:
-                    dest = self.g.vs.find(x=v.X, y= v.Y)
-                    self.g.add_edges([(vertice, dest)], {"adjacene" : True})
+            # relation adjacecence
+            self.AdjancenceRelation(vertice)
+            # relation inclusion
+            self.InclusionRelation(vertice)
+
+
+    def AdjancenceRelation(self, vertice):
+        voisins = self.getVoisins(([vertice["x"], vertice["y"]]))
+        for v in voisins:
+            if v != 0:
+                if (vertice["name"] == "Tree" and type(v) == Line) or (vertice["name"] == "Line" and type(v) == Tree): # Tree in line ar not adjacent to their line
+                    pass
+                elif vertice["name"] == str(v) and vertice["x"] == v.X and vertice["y"] == v.Y: # identical node
+                    pass
+                else:
+                    dest = self.g.vs.find(x=v.X, y=v.Y)
+                    self.g.add_edges([(vertice, dest)], {"adjacene": True})
+
+    def InclusionRelation(self,vertice):
+        voisins = set(self.getVoisins(([vertice["x"], vertice["y"]])))
+        for v in voisins:
+            if(vertice["name"] == "Tree" and type(v) == Line ):
+                dest = self.g.vs.find(x=v.X, y=v.Y)
+                self.g.add_edges([(vertice, dest)], {"inclusion": True})
+
 
     def has_node(self, attributes):
         if self.g.vcount() >0:
