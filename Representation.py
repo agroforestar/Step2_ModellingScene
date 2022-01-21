@@ -1,5 +1,7 @@
 from PIL import Image, ImageDraw
 import numpy as np
+
+
 class Representation:
 
     def __init__(self, size):

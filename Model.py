@@ -66,17 +66,16 @@ class Model:
         """
         self.raster[newObject.X, newObject.Y] = newObject
 
-    def getVoisins(self, xy) -> list:
+    def getVoisins(self, xy, rayon :int) -> list:
         """
         Retourne les voisins d'un pixel donné
         :param xy: coordonnées x et y
         :return: liste des voisins
         """
-
         startPosX = max(xy[0] - 1, 0)
         startPosY = max(xy[1] - 1, 0)
-        endPosX = min(xy[0] + 1, self.size[0])
-        endPosY = min(xy[1] + 1, self.size[1])
+        endPosX = min(xy[0] + rayon+1, self.size[0])
+        endPosY = min(xy[1] +rayon +1, self.size[1])
 
         voisin = []
         for rowNum in range(startPosX,endPosX) :
@@ -95,9 +94,6 @@ class Model:
 ## Graph methods
     def createGraph(self):
         self.createVertices()
-        for v in self.g.vs:
-            if v["name"] == "Line":
-                print(v["name"]+ " x : "+str(v["x"])+" y:"+str(v["y"]))
         self.createEdges()
 
 
@@ -126,7 +122,7 @@ class Model:
 
 
     def AdjancenceRelation(self, vertice):
-        voisins = self.getVoisins(([vertice["x"], vertice["y"]]))
+        voisins = self.getVoisins(([vertice["x"], vertice["y"]]), 1)
         for v in voisins:
             if v != 0:
                 if (vertice["name"] == "Tree" and type(v) == Line) or (vertice["name"] == "Line" and type(v) == Tree): # Tree in line ar not adjacent to their line
@@ -138,7 +134,7 @@ class Model:
                     self.g.add_edges([(vertice, dest)], {"adjacene": True})
 
     def InclusionRelation(self,vertice):
-        voisins = set(self.getVoisins(([vertice["x"], vertice["y"]])))
+        voisins = set(self.getVoisins(([vertice["x"], vertice["y"]]), 1))
         for v in voisins:
             if(vertice["name"] == "Tree" and type(v) == Line ):
                 dest = self.g.vs.find(x=v.X, y=v.Y)

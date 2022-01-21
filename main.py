@@ -161,16 +161,8 @@ if __name__ == '__main__':
     ###Traitement des culture
     expandCrop([element for element in elementInScene if type(element) == Crop], image)
     image.visual.colorRepresentation(image.raster)
-  #  print(image)
+    print(image)
 
     ###### Création graphe
     image.createGraph()
-
-    # for l in range(len(lines)):
-    #     index = [g.vcount(), g.vcount() + len(lines[l].points)]
-    #     g.add_vertices(len(lines[l].points))
-    #
-    #     for i in range(index[0], index[1]):
-    #         print(l, i)
-    #         g.add_edge(l, i)
     Affichage(image.g)
