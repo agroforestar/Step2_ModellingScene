@@ -6,7 +6,7 @@ from Line import *
 
 ## Constante
 # Hypothèse : 1 pixel = 1m
-SCENE_SIZE = [20, 31]
+SCENE_SIZE = [50, 50]
 
 
 ## Methods
@@ -92,7 +92,7 @@ def findLines(listTree: list, terrain: np.array) -> list[list]:
 
 ### Methods for graphe
 
-####TODO : transfert in model class
+####TODO : move to model class
 def Affichage(graph: Graph):
     layout = graph.layout("kk")
     graph.vs["label"] = graph.vs["name"]
@@ -123,7 +123,7 @@ def expandCrop(crops: list, image: Model):
                     voisin.append(n)
 
 
-def getVoisins(xy) -> list:
+def getVoisins(xy, buffer = 1) -> list:
     """
     Retourne les voisins d'un pixel donné
     :param xy: coordonnées x et y
@@ -133,9 +133,9 @@ def getVoisins(xy) -> list:
 
     startPosY = max(xy[1] - 1, 0)
 
-    endPosX = min(xy[0] + 1, SCENE_SIZE[0])
+    endPosX = min(xy[0] + buffer + 1, SCENE_SIZE[0])
 
-    endPosY = min(xy[1] + 1, SCENE_SIZE[1])
+    endPosY = min(xy[1] + buffer+ 1, SCENE_SIZE[1])
 
     voisin = []
     for rowNum in range(startPosX, endPosX):
@@ -166,3 +166,4 @@ if __name__ == '__main__':
     ###### Création graphe
     image.createGraph()
     Affichage(image.g)
+    image.exportScene()

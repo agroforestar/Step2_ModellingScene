@@ -91,27 +91,34 @@ class Model:
                                 voisin.append(element)
         return voisin
 
+    def getAllelementsInScene(self):
+        elements = list()
+        for i in range(self.size[0]):
+            for j in range(self.size[1]):
+                if self.raster[i, j] != 0:
+                    if type(self.raster[i, j]) != list :
+                        if not elements.__contains__(self.raster[i, j]) :
+                            elements.append(self.raster[i, j])
+                    else:
+                        for element in self.raster[i, j]:
+                            if not elements.__contains__(element):
+                                elements.append(element)
+        return elements
+
 ## Graph methods
     def createGraph(self):
         self.createVertices()
         self.createEdges()
 
-
     def createVertices(self):
-        for i in range(self.size[0]):
-            for j in range(self.size[1]):
-                if self.raster[i, j] != 0:
-                    if type(self.raster[i, j]) != list:
-                        self.addVertice({"name": repr(self.raster[i, j]), "x": self.raster[i, j].X, "y": self.raster[i, j].Y})
-                    else:
-                        for element in self.raster[i, j]:
-                            self.addVertice({"name":repr(element), "x":element.X, "y": element.Y})
+        inScene = self.getAllelementsInScene()
+        for element in inScene:
+            self.addVertice({"name": repr(element), "x": element.X, "y": element.Y})
 
     def addVertice(self, attributes : dict):
         if not self.has_node(attributes):
             name = attributes.pop('name')
             self.g.add_vertices(name, attributes)
-
 
     def createEdges(self):
         for vertice in self.g.vs:
@@ -119,7 +126,6 @@ class Model:
             self.AdjancenceRelation(vertice)
             # relation inclusion
             self.InclusionRelation(vertice)
-
 
     def AdjancenceRelation(self, vertice):
         voisins = self.getVoisins(([vertice["x"], vertice["y"]]), 1)
@@ -140,7 +146,6 @@ class Model:
                 dest = self.g.vs.find(x=v.X, y=v.Y)
                 self.g.add_edges([(vertice, dest)], {"inclusion": True})
 
-
     def has_node(self, attributes):
         if self.g.vcount() >0:
             rep = self.g.vs.select(name_eq=attributes["name"], x_eq= attributes["x"], y_eq= attributes["y"])
@@ -149,6 +154,12 @@ class Model:
             else:
                 return False
 
+    def exportScene(self):
+        f = open("output.txt", "w")
+        inScene = self.getAllelementsInScene()
+        for e in inScene:
+            f.write(repr(e)+";"+str(e.X)+";"+str(e.Y)+"\n")
+        f.close()
 
     def __repr__(self):
         self.visual.printRepresentation()
