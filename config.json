@@ -1,0 +1,52 @@
+{
+  "Scene_size": [50,50],
+  "ratio_pixel_meter": 1,
+  "plants": {
+    "tree": {
+      "IUGRE": {
+        "name": "Noyer"
+      },
+      "PEBAM": {
+        "name": "Avocado"
+      },
+      "ANUMU": {
+        "name": "Soursop"
+      },
+      "THOCA": {
+        "name": "Cocoa"
+      },
+      "MNKZA": {
+        "name": "Sapidilla"
+      }
+    },
+    "crop": {
+      "TRZAX": {
+        "name": "Wheat"
+      },
+      "ZEAMX": {
+        "name": "Zea mays"
+      },
+      "CXSES": {
+        "name": "Colocasia esculenta"
+      },
+      "MUBPA": {
+        "name": "Banana"
+      }
+    }
+  },
+  "link": {
+    "circle red" : "MNKZA",
+    "circle blue" : "ANUMU",
+    "circle black" : "IUGRE",
+    "circle green" : "PEBAM",
+    "circle yellow" : "THOCA",
+    "rectangle black" : "TRZAX"
+  },
+  "color": {
+    "(255,0,0)" : "bleu",
+    "(0,255,0)" : "green",
+    "(0,0,255)": "red",
+    "(0,0,0)": "black",
+    "(0,255,255)": "yellow"
+  }
+}

@@ -5,47 +5,58 @@ from webcolors import rgb_to_name, CSS3_HEX_TO_NAMES, hex_to_rgb  # python3 -m p
 from scipy.spatial import KDTree
 from collections import defaultdict
 
+import json
 
-dictionnaryForm = {
-    "circle": "Tree",
-    "rectangle": "Crop"
-}
-dictionnaryForm = defaultdict(lambda: "Plant", dictionnaryForm)
-dictionnaryColor = {
-    "seagreen": "IUGRE", # code EPPO pour le noyer
-    "yellow": "TRZAX" #code EPPO pour le blé tendre
-}
-dictionnaryColor= defaultdict(lambda: "Unknow", dictionnaryColor)
+class Parseur:
 
+    def __init__(self, data_path, config_path):
+        self.config_Path = config_path
+        self.data_Path = data_path
 
-def closest_colour(requested_colour):
+    def getColor(self, color_tested):
         min_colours = {}
-        for key, name in CSS3_HEX_TO_NAMES.items():
-            r_c, g_c, b_c = hex_to_rgb(key)
-            rd = (r_c - requested_colour[0]) ** 2
-            gd = (g_c - requested_colour[1]) ** 2
-            bd = (b_c - requested_colour[2]) ** 2
+        for color, name in self.color.items():
+            color = color.strip("(").strip(")").split(',')
+            b_c = int(color[0])
+            g_c = int(color[1])
+            r_c = int(color[2])
+            rd = (r_c - color_tested[0]) ** 2
+            gd = (g_c - color_tested[1]) ** 2
+            bd = (b_c - color_tested[2]) ** 2
             min_colours[(rd + gd + bd)] = name
         return min_colours[min(min_colours.keys())]
 
+    def readInputFile(self):
+        fichier = open(self.config_Path)
+        config = json.load(fichier)
 
-def convert_rgb_to_names(rgb_tuple):
-        try:
-            name = rgb_to_name((int(rgb_tuple[2]),int(rgb_tuple[1]),int(rgb_tuple[0])))
-        except ValueError:
-            name = closest_colour((int(rgb_tuple[2]),int(rgb_tuple[1]),int(rgb_tuple[0])))
-        return name
+        fichier = open(self.data_Path, "r")
 
-def readInputFile(name):
-    fichier = open(name, "r")
-    plants = list()
-    for line in fichier:
-        element = line.strip("\n").split(";")
-        form = element[0]# .split(" ")[0]
-        color = eval(element[1])#element[0].split(" ")[1]
-        color = convert_rgb_to_names(color[:3])
-        if(dictionnaryForm[form] == "Crop"):
-                plants.append(Crop(dictionnaryColor[color], element[2], element[3]))
-        else:
-                plants.append(Tree(dictionnaryColor[color], element[2], element[3]))
-    return plants
+        plants = list()
+        for line in fichier:
+            element = line.strip("\n").split(";")
+            form = element[0]
+            color = eval(element[1])
+            color = self.getColor(color[:3])
+            element_name = form+" "+color
+            if element_name in config["link"].keys():
+                code_EPPO = config["link"][element_name]
+                if code_EPPO in self.tree:
+                    plants.append(Tree(self.tree[code_EPPO], element[2], element[3]))
+                elif code_EPPO in self.crop:
+                    plants.append(Crop(self.crop[code_EPPO], element[2], element[3]))
+            else:
+                    plants.append(Plant("Unknow", element[2], element[3]))
+        fichier.close()
+        return plants
+
+
+    def initialisation(self):
+        fichier = open(self.config_Path)
+        data = json.load(fichier)
+        size = data["Scene_size"]
+        self.color = data["color"]
+        self.tree = data["plants"]["tree"]
+        self.crop = data["plants"]["crop"]
+        fichier.close()
+        return size

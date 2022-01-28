@@ -1,0 +1,15 @@
+Crop;3;4
+Tree;1;15
+Line;1;22
+Tree;1;18
+Tree;1;21
+Tree;1;24
+Tree;1;27
+Tree;1;30
+Tree;15;15
+Line;15;22
+Tree;15;18
+Tree;15;21
+Tree;15;24
+Tree;15;27
+Tree;15;30

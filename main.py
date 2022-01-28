@@ -6,7 +6,7 @@ from Line import *
 
 ## Constante
 # Hypothèse : 1 pixel = 1m
-SCENE_SIZE = [50, 50]
+SCENE_SIZE = None
 
 
 ## Methods
@@ -143,10 +143,14 @@ def getVoisins(xy, buffer = 1) -> list:
             voisin.append([rowNum, colNum])
     return voisin
 
+
+
 ## Main
 # command : python3 main.py InputFile.txt
 if __name__ == '__main__':
-    elementInScene = readInputFile(sys.argv[1])
+    parseur = Parseur(sys.argv[1], sys.argv[2])
+    SCENE_SIZE = parseur.initialisation()
+    elementInScene = parseur.readInputFile()
     image = Model(SCENE_SIZE)
 
     nbElement = len(elementInScene)
