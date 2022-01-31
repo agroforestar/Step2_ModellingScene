@@ -8,12 +8,20 @@ from collections import defaultdict
 import json
 
 class Parseur:
+    """!
+    @class Class in charge to read/write data and to memorize config parameters
+    """
 
     def __init__(self, data_path, config_path):
         self.config_Path = config_path
         self.data_Path = data_path
 
     def getColor(self, color_tested):
+        """!
+        @brief Get the color name from a list of color thanks to a minamal distance calculate with euclidian distance
+        @aram color_tested: color tested (format BGR)
+        @return: name of the color
+        """
         min_colours = {}
         for color, name in self.color.items():
             color = color.strip("(").strip(")").split(',')
@@ -27,6 +35,10 @@ class Parseur:
         return min_colours[min(min_colours.keys())]
 
     def readInputFile(self):
+        """!
+        @brief Read the data file with the elements of the scene
+        @return: list of the elements
+        """
         fichier = open(self.config_Path)
         config = json.load(fichier)
 
@@ -52,6 +64,10 @@ class Parseur:
 
 
     def initialisation(self):
+        """!
+        @brief Initialize the program with the config file
+        @return: size of the scene
+        """
         fichier = open(self.config_Path)
         data = json.load(fichier)
         size = data["Scene_size"]

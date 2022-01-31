@@ -12,11 +12,11 @@ SCENE_SIZE = None
 ## Methods
 ###Methods for the lines creation
 def searchTree(origin: Tree, terrain: np.array) -> list:
-    """
-    Find the neighbors of a tree
-    :param origin: tree of interest
-    :param terrain: scene with other trees
-    :return: a list of trees in the neighborhood of origin
+    """!
+    @brief Find the neighbors of a tree
+    @param origin: tree of interest
+    @param terrain: scene with other trees
+    @return: a list of trees in the neighborhood of origin
     """
     buffer = 4
     listTree = []
@@ -28,11 +28,11 @@ def searchTree(origin: Tree, terrain: np.array) -> list:
 
 
 def isInLine(line: list, newTree: Tree) -> bool:
-    """
-    Test si l'arbre qu'on veut ajouté peut appartenir à la ligne (condition de distance et d'angle respectées)
-    :param line: la ligne concernée
-    :param newTree: l'arbre potentiel
-    :return: Vrai si l'arbre appartient à la ligne, Faux sinon
+    """!
+    @brief Test si l'arbre qu'on veut ajouté peut appartenir à la ligne (condition de distance et d'angle respectées)
+    @param line: la ligne concernée
+    @param newTree: l'arbre potentiel
+    @return: Vrai si l'arbre appartient à la ligne, Faux sinon
     """
     temp_line = line.copy()
     temp_line.append(newTree)
@@ -53,11 +53,11 @@ def isInLine(line: list, newTree: Tree) -> bool:
 
 
 def findLines(listTree: list, terrain: np.array) -> list[list]:
-    """
-    Retourne toutes les lignes formées par la arbres présents dans la scène
-    :param listTree: arbres de la scène
-    :param terrain: modèle contenant la scène
-    :return: liste des lignes trouvées
+    """!
+    @brief Retourne toutes les lignes formées par la arbres présents dans la scène
+    @param listTree: arbres de la scène
+    @param terrain: modèle contenant la scène
+    @return: liste des lignes trouvées
     """
     traitedTree = list()
     lines = list()
@@ -104,11 +104,11 @@ def Affichage(graph: Graph):
 
 ###Methods for the crops creation
 def expandCrop(crops: list, image: Model):
-    """
-    Pour chaque marqueurs culture, la méthodes cherches les pixels adjacants et ajoutent leur appartenance à la culture
+    """!
+    @brief Pour chaque marqueurs culture, la méthodes cherches les pixels adjacants et ajoutent leur appartenance à la culture
     Recommence pour chaque pixel appartenant à la culture
-    :param crops: marqueurs de culture
-    :param image: modele contenant la scène (cf class Model)
+    @param crops: marqueurs de culture
+    @param image: modele contenant la scène (cf class Model)
     """
     for c in crops:
         voisin = [[c.X - 1, c.Y - 1], [c.X, c.Y - 1], [c.X + 1, c.Y - 1],
@@ -124,10 +124,10 @@ def expandCrop(crops: list, image: Model):
 
 
 def getVoisins(xy, buffer = 1) -> list:
-    """
-    Retourne les voisins d'un pixel donné
-    :param xy: coordonnées x et y
-    :return: liste des voisins
+    """!
+    @brief Retourne les voisins d'un pixel donné
+    @param xy: coordonnées x et y
+    @return: liste des voisins
     """
     startPosX = max(xy[0] - 1, 0)
 

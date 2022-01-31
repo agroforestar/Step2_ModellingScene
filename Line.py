@@ -1,5 +1,9 @@
 import numpy as np
+
 class Line:
+    """!
+    @class Object reprensents a line of something (or linear object)
+    """
     def __init__(self, listPoints):
         self.X = round(np.mean([c.X for c in listPoints]))
         self.Y = round(np.mean([c.Y for c in listPoints]))

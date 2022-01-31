@@ -11,6 +11,10 @@ class Representation:
         self.colorComposed = dict()
 
     def colorRepresentation(self, raster : np.array):
+        """!
+        @brief Compute a color for each pixel depending of the pixel content
+        @param raster: source
+        """
         for i in range(self.size[0]):
             for j in range(self.size[1]):
                 if raster[i, j] == 0:
@@ -29,5 +33,8 @@ class Representation:
                             self.writeImage.point([i, j], self.colorComposed[str(set(typeElement))])
 
     def printRepresentation(self):
+        """!
+        @brief Display the raster with color in a image of 500*500
+        """
         self.image.resize((500, 500), Image.NEAREST).show()
 
