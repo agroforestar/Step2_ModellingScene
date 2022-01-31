@@ -1,0 +1,109 @@
+\hypertarget{class_parseur_1_1_parseur}{}\doxysection{Parseur.\+Parseur Class Reference}
+\label{class_parseur_1_1_parseur}\index{Parseur.Parseur@{Parseur.Parseur}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{class_parseur_1_1_parseur_a672a6414bff0b8c877519db46fff8b7e}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, data\+\_\+path, config\+\_\+path)
+\item 
+def \mbox{\hyperlink{class_parseur_1_1_parseur_ab2403ddb7755f3c5a8937a85696c7ca2}{get\+Color}} (self, color\+\_\+tested)
+\item 
+def \mbox{\hyperlink{class_parseur_1_1_parseur_ae399f866ef4c6104c339ec798a27d61a}{read\+Input\+File}} (self)
+\item 
+def \mbox{\hyperlink{class_parseur_1_1_parseur_a2cde6e0a37aa5deb607c10b407a20278}{initialisation}} (self)
+\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_parseur_1_1_parseur_af504502e9dd46811990a5462ce37be8e}{config\+\_\+\+Path}}
+\item 
+\mbox{\hyperlink{class_parseur_1_1_parseur_a929b1c3b7cf476cde79472c24a2819eb}{data\+\_\+\+Path}}
+\item 
+\mbox{\hyperlink{class_parseur_1_1_parseur_ad82f6ff1b5c19d1a496fe0705815b64d}{color}}
+\item 
+\mbox{\hyperlink{class_parseur_1_1_parseur_a808cf2bd1a2f752095317fbbc1a6ac62}{tree}}
+\item 
+\mbox{\hyperlink{class_parseur_1_1_parseur_a6930f4d0bc40766d0cf6465591ad44c4}{crop}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Detailed Description}
+\begin{DoxyVerb}@class Class in charge to read/write data and to memorize config parameters
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_parseur_1_1_parseur_a672a6414bff0b8c877519db46fff8b7e}\label{class_parseur_1_1_parseur_a672a6414bff0b8c877519db46fff8b7e}} 
+\index{Parseur.Parseur@{Parseur.Parseur}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!Parseur.Parseur@{Parseur.Parseur}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def Parseur.\+Parseur.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{data\+\_\+path,  }\item[{}]{config\+\_\+path }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_parseur_1_1_parseur_ab2403ddb7755f3c5a8937a85696c7ca2}\label{class_parseur_1_1_parseur_ab2403ddb7755f3c5a8937a85696c7ca2}} 
+\index{Parseur.Parseur@{Parseur.Parseur}!getColor@{getColor}}
+\index{getColor@{getColor}!Parseur.Parseur@{Parseur.Parseur}}
+\doxysubsubsection{\texorpdfstring{getColor()}{getColor()}}
+{\footnotesize\ttfamily def Parseur.\+Parseur.\+get\+Color (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{color\+\_\+tested }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Get the color name from a list of color thanks to a minamal distance calculate with euclidian distance
+@aram color_tested: color tested (format BGR)
+@return: name of the color
+\end{DoxyVerb}
+ \mbox{\Hypertarget{class_parseur_1_1_parseur_a2cde6e0a37aa5deb607c10b407a20278}\label{class_parseur_1_1_parseur_a2cde6e0a37aa5deb607c10b407a20278}} 
+\index{Parseur.Parseur@{Parseur.Parseur}!initialisation@{initialisation}}
+\index{initialisation@{initialisation}!Parseur.Parseur@{Parseur.Parseur}}
+\doxysubsubsection{\texorpdfstring{initialisation()}{initialisation()}}
+{\footnotesize\ttfamily def Parseur.\+Parseur.\+initialisation (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Initialize the program with the config file
+@return: size of the scene
+\end{DoxyVerb}
+ \mbox{\Hypertarget{class_parseur_1_1_parseur_ae399f866ef4c6104c339ec798a27d61a}\label{class_parseur_1_1_parseur_ae399f866ef4c6104c339ec798a27d61a}} 
+\index{Parseur.Parseur@{Parseur.Parseur}!readInputFile@{readInputFile}}
+\index{readInputFile@{readInputFile}!Parseur.Parseur@{Parseur.Parseur}}
+\doxysubsubsection{\texorpdfstring{readInputFile()}{readInputFile()}}
+{\footnotesize\ttfamily def Parseur.\+Parseur.\+read\+Input\+File (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}@brief Read the data file with the elements of the scene
+@return: list of the elements
+\end{DoxyVerb}
+ 
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_parseur_1_1_parseur_ad82f6ff1b5c19d1a496fe0705815b64d}\label{class_parseur_1_1_parseur_ad82f6ff1b5c19d1a496fe0705815b64d}} 
+\index{Parseur.Parseur@{Parseur.Parseur}!color@{color}}
+\index{color@{color}!Parseur.Parseur@{Parseur.Parseur}}
+\doxysubsubsection{\texorpdfstring{color}{color}}
+{\footnotesize\ttfamily Parseur.\+Parseur.\+color}
+
+\mbox{\Hypertarget{class_parseur_1_1_parseur_af504502e9dd46811990a5462ce37be8e}\label{class_parseur_1_1_parseur_af504502e9dd46811990a5462ce37be8e}} 
+\index{Parseur.Parseur@{Parseur.Parseur}!config\_Path@{config\_Path}}
+\index{config\_Path@{config\_Path}!Parseur.Parseur@{Parseur.Parseur}}
+\doxysubsubsection{\texorpdfstring{config\_Path}{config\_Path}}
+{\footnotesize\ttfamily Parseur.\+Parseur.\+config\+\_\+\+Path}
+
+\mbox{\Hypertarget{class_parseur_1_1_parseur_a6930f4d0bc40766d0cf6465591ad44c4}\label{class_parseur_1_1_parseur_a6930f4d0bc40766d0cf6465591ad44c4}} 
+\index{Parseur.Parseur@{Parseur.Parseur}!crop@{crop}}
+\index{crop@{crop}!Parseur.Parseur@{Parseur.Parseur}}
+\doxysubsubsection{\texorpdfstring{crop}{crop}}
+{\footnotesize\ttfamily Parseur.\+Parseur.\+crop}
+
+\mbox{\Hypertarget{class_parseur_1_1_parseur_a929b1c3b7cf476cde79472c24a2819eb}\label{class_parseur_1_1_parseur_a929b1c3b7cf476cde79472c24a2819eb}} 
+\index{Parseur.Parseur@{Parseur.Parseur}!data\_Path@{data\_Path}}
+\index{data\_Path@{data\_Path}!Parseur.Parseur@{Parseur.Parseur}}
+\doxysubsubsection{\texorpdfstring{data\_Path}{data\_Path}}
+{\footnotesize\ttfamily Parseur.\+Parseur.\+data\+\_\+\+Path}
+
+\mbox{\Hypertarget{class_parseur_1_1_parseur_a808cf2bd1a2f752095317fbbc1a6ac62}\label{class_parseur_1_1_parseur_a808cf2bd1a2f752095317fbbc1a6ac62}} 
+\index{Parseur.Parseur@{Parseur.Parseur}!tree@{tree}}
+\index{tree@{tree}!Parseur.Parseur@{Parseur.Parseur}}
+\doxysubsubsection{\texorpdfstring{tree}{tree}}
+{\footnotesize\ttfamily Parseur.\+Parseur.\+tree}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_parseur_8py}{Parseur.\+py}}\end{DoxyCompactItemize}

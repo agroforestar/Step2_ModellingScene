@@ -1,0 +1,199 @@
+\hypertarget{namespacemain}{}\doxysection{main Namespace Reference}
+\label{namespacemain}\index{main@{main}}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+list \mbox{\hyperlink{namespacemain_aab226061040a136a5fc7fee2b9c3e945}{search\+Tree}} (Tree origin, np.\+array terrain)
+\begin{DoxyCompactList}\small\item\em Methods Methods for the lines creation. \end{DoxyCompactList}\item 
+bool \mbox{\hyperlink{namespacemain_adc82daa6e15defa085f551ac32c15546}{is\+In\+Line}} (list \mbox{\hyperlink{namespacemain_aab87f3c57bb4c5fa8f09936886bef3ec}{line}}, Tree new\+Tree)
+\begin{DoxyCompactList}\small\item\em Test si l\textquotesingle{}arbre qu\textquotesingle{}on veut ajouté peut appartenir à la ligne (condition de distance et d\textquotesingle{}angle respectées) \end{DoxyCompactList}\item 
+list\mbox{[}list\mbox{]} \mbox{\hyperlink{namespacemain_ac9b98f02579a332dc513568d78541a06}{find\+Lines}} (list list\+Tree, np.\+array terrain)
+\begin{DoxyCompactList}\small\item\em Retourne toutes les lignes formées par la arbres présents dans la scène. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacemain_a345e9b2e8b06f2c6804b7443a6304b20}{Affichage}} (Graph graph)
+\begin{DoxyCompactList}\small\item\em Methods for graphe. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespacemain_a2f9044db5a4b8008c638f0186202807b}{expand\+Crop}} (list crops, \mbox{\hyperlink{class_model_1_1_model}{Model}} \mbox{\hyperlink{namespacemain_a377f0d69bf08cd5269df59e68932993b}{image}})
+\begin{DoxyCompactList}\small\item\em Methods for the crops creation. \end{DoxyCompactList}\item 
+list \mbox{\hyperlink{namespacemain_aab8de4dcccd68c19d618cd7e2f3d06e9}{get\+Voisins}} (xy, buffer=1)
+\begin{DoxyCompactList}\small\item\em Retourne les voisins d\textquotesingle{}un pixel donné \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{namespacemain_ac7e7404e6e1cbf7f45bde3f554a48fde}{SCENE\+\_\+\+SIZE}} = None
+\begin{DoxyCompactList}\small\item\em Constante Hypothèse \+: 1 pixel = 1m. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacemain_a1dc48005ccce482e169f52ef390787ac}{parseur}} = Parseur(sys.\+argv\mbox{[}1\mbox{]}, sys.\+argv\mbox{[}2\mbox{]})
+\begin{DoxyCompactList}\small\item\em Main command \+: python3 \mbox{\hyperlink{main_8py}{main.\+py}} Input\+File.\+txt. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacemain_ab0a8d93f2768a2e5bbb25c98f0ef07b4}{element\+In\+Scene}} = parseur.\+read\+Input\+File()
+\item 
+\mbox{\hyperlink{namespacemain_a377f0d69bf08cd5269df59e68932993b}{image}} = \mbox{\hyperlink{class_model_1_1_model}{Model}}(\mbox{\hyperlink{namespacemain_ac7e7404e6e1cbf7f45bde3f554a48fde}{SCENE\+\_\+\+SIZE}})
+\item 
+\mbox{\hyperlink{namespacemain_a825526602f018407c853e2dc2c872588}{nb\+Element}} = len(\mbox{\hyperlink{namespacemain_ab0a8d93f2768a2e5bbb25c98f0ef07b4}{element\+In\+Scene}})
+\item 
+list\mbox{[}list\mbox{]} \mbox{\hyperlink{namespacemain_a7ad5e51fc7e159da3bdfa0e9d366500e}{lines}} = \mbox{\hyperlink{namespacemain_ac9b98f02579a332dc513568d78541a06}{find\+Lines}}(\mbox{[}element for element in \mbox{\hyperlink{namespacemain_ab0a8d93f2768a2e5bbb25c98f0ef07b4}{element\+In\+Scene}} if type(element) == Tree\mbox{]}, \mbox{\hyperlink{namespacemain_a377f0d69bf08cd5269df59e68932993b}{image}})
+\begin{DoxyCompactList}\small\item\em Traitement des lignes. \end{DoxyCompactList}\item 
+\mbox{\hyperlink{namespacemain_aab87f3c57bb4c5fa8f09936886bef3ec}{line}} = Line(line)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespacemain_a345e9b2e8b06f2c6804b7443a6304b20}\label{namespacemain_a345e9b2e8b06f2c6804b7443a6304b20}} 
+\index{main@{main}!Affichage@{Affichage}}
+\index{Affichage@{Affichage}!main@{main}}
+\doxysubsubsection{\texorpdfstring{Affichage()}{Affichage()}}
+{\footnotesize\ttfamily def main.\+Affichage (\begin{DoxyParamCaption}\item[{Graph}]{graph }\end{DoxyParamCaption})}
+
+
+
+Methods for graphe. 
+
+TODO \+: move to model class \mbox{\Hypertarget{namespacemain_a2f9044db5a4b8008c638f0186202807b}\label{namespacemain_a2f9044db5a4b8008c638f0186202807b}} 
+\index{main@{main}!expandCrop@{expandCrop}}
+\index{expandCrop@{expandCrop}!main@{main}}
+\doxysubsubsection{\texorpdfstring{expandCrop()}{expandCrop()}}
+{\footnotesize\ttfamily def main.\+expand\+Crop (\begin{DoxyParamCaption}\item[{list}]{crops,  }\item[{\mbox{\hyperlink{class_model_1_1_model}{Model}}}]{image }\end{DoxyParamCaption})}
+
+
+
+Methods for the crops creation. 
+
+Pour chaque marqueurs culture, la méthodes cherches les pixels adjacants et ajoutent leur appartenance à la culture Recommence pour chaque pixel appartenant à la culture 
+\begin{DoxyParams}{Parameters}
+{\em crops} & marqueurs de culture \\
+\hline
+{\em image} & modele contenant la scène (cf class \mbox{\hyperlink{namespace_model}{Model}}) \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespacemain_ac9b98f02579a332dc513568d78541a06}\label{namespacemain_ac9b98f02579a332dc513568d78541a06}} 
+\index{main@{main}!findLines@{findLines}}
+\index{findLines@{findLines}!main@{main}}
+\doxysubsubsection{\texorpdfstring{findLines()}{findLines()}}
+{\footnotesize\ttfamily  list\mbox{[}list\mbox{]} main.\+find\+Lines (\begin{DoxyParamCaption}\item[{list}]{list\+Tree,  }\item[{np.\+array}]{terrain }\end{DoxyParamCaption})}
+
+
+
+Retourne toutes les lignes formées par la arbres présents dans la scène. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em list\+Tree} & arbres de la scène \\
+\hline
+{\em terrain} & modèle contenant la scène \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: liste des lignes trouvées 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacemain_aab8de4dcccd68c19d618cd7e2f3d06e9}\label{namespacemain_aab8de4dcccd68c19d618cd7e2f3d06e9}} 
+\index{main@{main}!getVoisins@{getVoisins}}
+\index{getVoisins@{getVoisins}!main@{main}}
+\doxysubsubsection{\texorpdfstring{getVoisins()}{getVoisins()}}
+{\footnotesize\ttfamily  list main.\+get\+Voisins (\begin{DoxyParamCaption}\item[{}]{xy,  }\item[{}]{buffer = {\ttfamily 1} }\end{DoxyParamCaption})}
+
+
+
+Retourne les voisins d\textquotesingle{}un pixel donné 
+
+
+\begin{DoxyParams}{Parameters}
+{\em xy} & coordonnées x et y \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: liste des voisins 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacemain_adc82daa6e15defa085f551ac32c15546}\label{namespacemain_adc82daa6e15defa085f551ac32c15546}} 
+\index{main@{main}!isInLine@{isInLine}}
+\index{isInLine@{isInLine}!main@{main}}
+\doxysubsubsection{\texorpdfstring{isInLine()}{isInLine()}}
+{\footnotesize\ttfamily  bool main.\+is\+In\+Line (\begin{DoxyParamCaption}\item[{list}]{line,  }\item[{Tree}]{new\+Tree }\end{DoxyParamCaption})}
+
+
+
+Test si l\textquotesingle{}arbre qu\textquotesingle{}on veut ajouté peut appartenir à la ligne (condition de distance et d\textquotesingle{}angle respectées) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em line} & la ligne concernée \\
+\hline
+{\em new\+Tree} & l\textquotesingle{}arbre potentiel \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: Vrai si l\textquotesingle{}arbre appartient à la ligne, Faux sinon 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespacemain_aab226061040a136a5fc7fee2b9c3e945}\label{namespacemain_aab226061040a136a5fc7fee2b9c3e945}} 
+\index{main@{main}!searchTree@{searchTree}}
+\index{searchTree@{searchTree}!main@{main}}
+\doxysubsubsection{\texorpdfstring{searchTree()}{searchTree()}}
+{\footnotesize\ttfamily  list main.\+search\+Tree (\begin{DoxyParamCaption}\item[{Tree}]{origin,  }\item[{np.\+array}]{terrain }\end{DoxyParamCaption})}
+
+
+
+Methods Methods for the lines creation. 
+
+Find the neighbors of a tree 
+\begin{DoxyParams}{Parameters}
+{\em origin} & tree of interest \\
+\hline
+{\em terrain} & scene with other trees \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: a list of trees in the neighborhood of origin 
+\end{DoxyReturn}
+
+
+\doxysubsection{Variable Documentation}
+\mbox{\Hypertarget{namespacemain_ab0a8d93f2768a2e5bbb25c98f0ef07b4}\label{namespacemain_ab0a8d93f2768a2e5bbb25c98f0ef07b4}} 
+\index{main@{main}!elementInScene@{elementInScene}}
+\index{elementInScene@{elementInScene}!main@{main}}
+\doxysubsubsection{\texorpdfstring{elementInScene}{elementInScene}}
+{\footnotesize\ttfamily main.\+element\+In\+Scene = parseur.\+read\+Input\+File()}
+
+\mbox{\Hypertarget{namespacemain_a377f0d69bf08cd5269df59e68932993b}\label{namespacemain_a377f0d69bf08cd5269df59e68932993b}} 
+\index{main@{main}!image@{image}}
+\index{image@{image}!main@{main}}
+\doxysubsubsection{\texorpdfstring{image}{image}}
+{\footnotesize\ttfamily main.\+image = \mbox{\hyperlink{class_model_1_1_model}{Model}}(\mbox{\hyperlink{namespacemain_ac7e7404e6e1cbf7f45bde3f554a48fde}{SCENE\+\_\+\+SIZE}})}
+
+\mbox{\Hypertarget{namespacemain_aab87f3c57bb4c5fa8f09936886bef3ec}\label{namespacemain_aab87f3c57bb4c5fa8f09936886bef3ec}} 
+\index{main@{main}!line@{line}}
+\index{line@{line}!main@{main}}
+\doxysubsubsection{\texorpdfstring{line}{line}}
+{\footnotesize\ttfamily main.\+line = Line(line)}
+
+\mbox{\Hypertarget{namespacemain_a7ad5e51fc7e159da3bdfa0e9d366500e}\label{namespacemain_a7ad5e51fc7e159da3bdfa0e9d366500e}} 
+\index{main@{main}!lines@{lines}}
+\index{lines@{lines}!main@{main}}
+\doxysubsubsection{\texorpdfstring{lines}{lines}}
+{\footnotesize\ttfamily list\mbox{[}list\mbox{]} main.\+lines = \mbox{\hyperlink{namespacemain_ac9b98f02579a332dc513568d78541a06}{find\+Lines}}(\mbox{[}element for element in \mbox{\hyperlink{namespacemain_ab0a8d93f2768a2e5bbb25c98f0ef07b4}{element\+In\+Scene}} if type(element) == Tree\mbox{]}, \mbox{\hyperlink{namespacemain_a377f0d69bf08cd5269df59e68932993b}{image}})}
+
+
+
+Traitement des lignes. 
+
+\mbox{\Hypertarget{namespacemain_a825526602f018407c853e2dc2c872588}\label{namespacemain_a825526602f018407c853e2dc2c872588}} 
+\index{main@{main}!nbElement@{nbElement}}
+\index{nbElement@{nbElement}!main@{main}}
+\doxysubsubsection{\texorpdfstring{nbElement}{nbElement}}
+{\footnotesize\ttfamily main.\+nb\+Element = len(\mbox{\hyperlink{namespacemain_ab0a8d93f2768a2e5bbb25c98f0ef07b4}{element\+In\+Scene}})}
+
+\mbox{\Hypertarget{namespacemain_a1dc48005ccce482e169f52ef390787ac}\label{namespacemain_a1dc48005ccce482e169f52ef390787ac}} 
+\index{main@{main}!parseur@{parseur}}
+\index{parseur@{parseur}!main@{main}}
+\doxysubsubsection{\texorpdfstring{parseur}{parseur}}
+{\footnotesize\ttfamily main.\+parseur = Parseur(sys.\+argv\mbox{[}1\mbox{]}, sys.\+argv\mbox{[}2\mbox{]})}
+
+
+
+Main command \+: python3 \mbox{\hyperlink{main_8py}{main.\+py}} Input\+File.\+txt. 
+
+\mbox{\Hypertarget{namespacemain_ac7e7404e6e1cbf7f45bde3f554a48fde}\label{namespacemain_ac7e7404e6e1cbf7f45bde3f554a48fde}} 
+\index{main@{main}!SCENE\_SIZE@{SCENE\_SIZE}}
+\index{SCENE\_SIZE@{SCENE\_SIZE}!main@{main}}
+\doxysubsubsection{\texorpdfstring{SCENE\_SIZE}{SCENE\_SIZE}}
+{\footnotesize\ttfamily main.\+SCENE\+\_\+\+SIZE = None}
+
+
+
+Constante Hypothèse \+: 1 pixel = 1m. 
+

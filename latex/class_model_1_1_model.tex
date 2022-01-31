@@ -1,0 +1,156 @@
+\hypertarget{class_model_1_1_model}{}\doxysection{Model.\+Model Class Reference}
+\label{class_model_1_1_model}\index{Model.Model@{Model.Model}}
+\doxysubsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{class_model_1_1_model_a3bcb6fa9285195b3bba2be8980980f6d}{\+\_\+\+\_\+init\+\_\+\+\_\+}} (self, \mbox{\hyperlink{class_model_1_1_model_a1ac11e1356e625a2a20d963feffff0a1}{size}})
+\item 
+def \mbox{\hyperlink{class_model_1_1_model_a09ac754131f2eda64694c2caeaa5d4e9}{bresenham\+Algorithm}} (self, x1, x2, y1, y2, new\+Object)
+\begin{DoxyCompactList}\small\item\em Apply the Bresenham algorithm to draw the segment (\mbox{[}(x1, y1), (x2, y2)\mbox{]}) in the raster (see \href{https://en.wikipedia.org/wiki/Bresenham\%27s_line_algorithm}{\texttt{ https\+://en.\+wikipedia.\+org/wiki/\+Bresenham\%27s\+\_\+line\+\_\+algorithm}} ) \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{class_model_1_1_model_a314afe725c693a16cc06174af1832d69}{add\+Line\+In\+Raster}} (self, Line new\+Object)
+\begin{DoxyCompactList}\small\item\em Add a line on the raster. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{class_model_1_1_model_a6c0ade85b1d9ea569d1092602dd1b290}{add\+Point\+In\+Raster}} (self, new\+Object)
+\begin{DoxyCompactList}\small\item\em Add an object with a size of one pixel on the raster. \end{DoxyCompactList}\item 
+list \mbox{\hyperlink{class_model_1_1_model_ae4553e1a33bbab5b94750e249d0467fd}{get\+Voisins}} (self, xy, int rayon)
+\begin{DoxyCompactList}\small\item\em Retour the neighbors of the point. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{class_model_1_1_model_aa05b9fa962ca1d9607ec33b9c49004a6}{get\+Allelements\+In\+Scene}} (self)
+\begin{DoxyCompactList}\small\item\em Get all differents entities in the raster. \end{DoxyCompactList}\end{DoxyCompactItemize}
+\doxysubsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{class_model_1_1_model_a1ac11e1356e625a2a20d963feffff0a1}{size}}
+\item 
+\mbox{\hyperlink{class_model_1_1_model_aafb199dc7e70ca541b0006d74708816c}{raster}}
+\item 
+\mbox{\hyperlink{class_model_1_1_model_ad53283c94f447b4b32271a1bc752b68b}{visual}}
+\item 
+\mbox{\hyperlink{class_model_1_1_model_aae59405439087a90273b99571445b485}{g}}
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_model_1_1_model_a3bcb6fa9285195b3bba2be8980980f6d}\label{class_model_1_1_model_a3bcb6fa9285195b3bba2be8980980f6d}} 
+\index{Model.Model@{Model.Model}!\_\_init\_\_@{\_\_init\_\_}}
+\index{\_\_init\_\_@{\_\_init\_\_}!Model.Model@{Model.Model}}
+\doxysubsubsection{\texorpdfstring{\_\_init\_\_()}{\_\_init\_\_()}}
+{\footnotesize\ttfamily def Model.\+Model.\+\_\+\+\_\+init\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{size }\end{DoxyParamCaption})}
+
+
+
+\doxysubsection{Member Function Documentation}
+\mbox{\Hypertarget{class_model_1_1_model_a314afe725c693a16cc06174af1832d69}\label{class_model_1_1_model_a314afe725c693a16cc06174af1832d69}} 
+\index{Model.Model@{Model.Model}!addLineInRaster@{addLineInRaster}}
+\index{addLineInRaster@{addLineInRaster}!Model.Model@{Model.Model}}
+\doxysubsubsection{\texorpdfstring{addLineInRaster()}{addLineInRaster()}}
+{\footnotesize\ttfamily def Model.\+Model.\+add\+Line\+In\+Raster (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{Line}]{new\+Object }\end{DoxyParamCaption})}
+
+
+
+Add a line on the raster. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Object} & the new line \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_model_1_1_model_a6c0ade85b1d9ea569d1092602dd1b290}\label{class_model_1_1_model_a6c0ade85b1d9ea569d1092602dd1b290}} 
+\index{Model.Model@{Model.Model}!addPointInRaster@{addPointInRaster}}
+\index{addPointInRaster@{addPointInRaster}!Model.Model@{Model.Model}}
+\doxysubsubsection{\texorpdfstring{addPointInRaster()}{addPointInRaster()}}
+{\footnotesize\ttfamily def Model.\+Model.\+add\+Point\+In\+Raster (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{new\+Object }\end{DoxyParamCaption})}
+
+
+
+Add an object with a size of one pixel on the raster. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em new\+Object} & the new object \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_model_1_1_model_a09ac754131f2eda64694c2caeaa5d4e9}\label{class_model_1_1_model_a09ac754131f2eda64694c2caeaa5d4e9}} 
+\index{Model.Model@{Model.Model}!bresenhamAlgorithm@{bresenhamAlgorithm}}
+\index{bresenhamAlgorithm@{bresenhamAlgorithm}!Model.Model@{Model.Model}}
+\doxysubsubsection{\texorpdfstring{bresenhamAlgorithm()}{bresenhamAlgorithm()}}
+{\footnotesize\ttfamily def Model.\+Model.\+bresenham\+Algorithm (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{x1,  }\item[{}]{x2,  }\item[{}]{y1,  }\item[{}]{y2,  }\item[{}]{new\+Object }\end{DoxyParamCaption})}
+
+
+
+Apply the Bresenham algorithm to draw the segment (\mbox{[}(x1, y1), (x2, y2)\mbox{]}) in the raster (see \href{https://en.wikipedia.org/wiki/Bresenham\%27s_line_algorithm}{\texttt{ https\+://en.\+wikipedia.\+org/wiki/\+Bresenham\%27s\+\_\+line\+\_\+algorithm}} ) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em x1} & X coord of the first point \\
+\hline
+{\em x2} & X coord of the second point \\
+\hline
+{\em y1} & Y coord of the first point \\
+\hline
+{\em y2} & Y coord of the second point \\
+\hline
+{\em new\+Object} & line where from the points \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_model_1_1_model_aa05b9fa962ca1d9607ec33b9c49004a6}\label{class_model_1_1_model_aa05b9fa962ca1d9607ec33b9c49004a6}} 
+\index{Model.Model@{Model.Model}!getAllelementsInScene@{getAllelementsInScene}}
+\index{getAllelementsInScene@{getAllelementsInScene}!Model.Model@{Model.Model}}
+\doxysubsubsection{\texorpdfstring{getAllelementsInScene()}{getAllelementsInScene()}}
+{\footnotesize\ttfamily def Model.\+Model.\+get\+Allelements\+In\+Scene (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Get all differents entities in the raster. 
+
+\begin{DoxyReturn}{Returns}
+\+: a list of entities 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_model_1_1_model_ae4553e1a33bbab5b94750e249d0467fd}\label{class_model_1_1_model_ae4553e1a33bbab5b94750e249d0467fd}} 
+\index{Model.Model@{Model.Model}!getVoisins@{getVoisins}}
+\index{getVoisins@{getVoisins}!Model.Model@{Model.Model}}
+\doxysubsubsection{\texorpdfstring{getVoisins()}{getVoisins()}}
+{\footnotesize\ttfamily  list Model.\+Model.\+get\+Voisins (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{xy,  }\item[{int}]{rayon }\end{DoxyParamCaption})}
+
+
+
+Retour the neighbors of the point. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em xy} & X and Y coord \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: neighbors list 
+\end{DoxyReturn}
+
+
+\doxysubsection{Member Data Documentation}
+\mbox{\Hypertarget{class_model_1_1_model_aae59405439087a90273b99571445b485}\label{class_model_1_1_model_aae59405439087a90273b99571445b485}} 
+\index{Model.Model@{Model.Model}!g@{g}}
+\index{g@{g}!Model.Model@{Model.Model}}
+\doxysubsubsection{\texorpdfstring{g}{g}}
+{\footnotesize\ttfamily Model.\+Model.\+g}
+
+\mbox{\Hypertarget{class_model_1_1_model_aafb199dc7e70ca541b0006d74708816c}\label{class_model_1_1_model_aafb199dc7e70ca541b0006d74708816c}} 
+\index{Model.Model@{Model.Model}!raster@{raster}}
+\index{raster@{raster}!Model.Model@{Model.Model}}
+\doxysubsubsection{\texorpdfstring{raster}{raster}}
+{\footnotesize\ttfamily Model.\+Model.\+raster}
+
+\mbox{\Hypertarget{class_model_1_1_model_a1ac11e1356e625a2a20d963feffff0a1}\label{class_model_1_1_model_a1ac11e1356e625a2a20d963feffff0a1}} 
+\index{Model.Model@{Model.Model}!size@{size}}
+\index{size@{size}!Model.Model@{Model.Model}}
+\doxysubsubsection{\texorpdfstring{size}{size}}
+{\footnotesize\ttfamily Model.\+Model.\+size}
+
+\mbox{\Hypertarget{class_model_1_1_model_ad53283c94f447b4b32271a1bc752b68b}\label{class_model_1_1_model_ad53283c94f447b4b32271a1bc752b68b}} 
+\index{Model.Model@{Model.Model}!visual@{visual}}
+\index{visual@{visual}!Model.Model@{Model.Model}}
+\doxysubsubsection{\texorpdfstring{visual}{visual}}
+{\footnotesize\ttfamily Model.\+Model.\+visual}
+
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+\mbox{\hyperlink{_model_8py}{Model.\+py}}\end{DoxyCompactItemize}

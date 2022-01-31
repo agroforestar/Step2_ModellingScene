@@ -1,0 +1,140 @@
+\hypertarget{namespace_model}{}\doxysection{Model Namespace Reference}
+\label{namespace_model}\index{Model@{Model}}
+\doxysubsection*{Classes}
+\begin{DoxyCompactItemize}
+\item 
+class \mbox{\hyperlink{class_model_1_1_model}{Model}}
+\end{DoxyCompactItemize}
+\doxysubsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \mbox{\hyperlink{namespace_model_ab5a1b37259893ca0b7353efed12b4cf2}{create\+Graph}} (self)
+\begin{DoxyCompactList}\small\item\em Graph methods. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespace_model_a083e065ca591a5b209217e5c267d7d8e}{create\+Vertices}} (self)
+\begin{DoxyCompactList}\small\item\em Create the vertices of the graph. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespace_model_a2d3148a36a1974665f3d418f33ad3d1b}{add\+Vertice}} (self, dict attributes)
+\begin{DoxyCompactList}\small\item\em Add a vertice with its attribute to the graph. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespace_model_a8de20f9202b9381c347350cd4f1e3d9c}{create\+Edges}} (self)
+\begin{DoxyCompactList}\small\item\em Create the edges of the graphs. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespace_model_ae1a09aa6b63f2f78d94642ae7bf569f1}{Adjancence\+Relation}} (self, vertice)
+\begin{DoxyCompactList}\small\item\em Create edge when two elements are neigbors. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespace_model_a8cd0d716538be2704b5120b6db3539fc}{Inclusion\+Relation}} (self, vertice)
+\begin{DoxyCompactList}\small\item\em Create edge when one element is include in onother. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespace_model_abc10cbe4178325ea4ca03128c27bd310}{has\+\_\+node}} (self, attributes)
+\begin{DoxyCompactList}\small\item\em Test if the graph has a node with specific attributes (only name, x, y) \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespace_model_aa9893f20932e5bc25b0084e90c8d41e3}{export\+Scene}} (self)
+\begin{DoxyCompactList}\small\item\em Export the raster on a text file. \end{DoxyCompactList}\item 
+def \mbox{\hyperlink{namespace_model_a4936bb7390b7fd20942d9389a714e75f}{\+\_\+\+\_\+repr\+\_\+\+\_\+}} (self)
+\end{DoxyCompactItemize}
+
+
+\doxysubsection{Function Documentation}
+\mbox{\Hypertarget{namespace_model_a4936bb7390b7fd20942d9389a714e75f}\label{namespace_model_a4936bb7390b7fd20942d9389a714e75f}} 
+\index{Model@{Model}!\_\_repr\_\_@{\_\_repr\_\_}}
+\index{\_\_repr\_\_@{\_\_repr\_\_}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{\_\_repr\_\_()}{\_\_repr\_\_()}}
+{\footnotesize\ttfamily def Model.\+\_\+\+\_\+repr\+\_\+\+\_\+ (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+\mbox{\Hypertarget{namespace_model_a2d3148a36a1974665f3d418f33ad3d1b}\label{namespace_model_a2d3148a36a1974665f3d418f33ad3d1b}} 
+\index{Model@{Model}!addVertice@{addVertice}}
+\index{addVertice@{addVertice}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{addVertice()}{addVertice()}}
+{\footnotesize\ttfamily def Model.\+add\+Vertice (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{dict}]{attributes }\end{DoxyParamCaption})}
+
+
+
+Add a vertice with its attribute to the graph. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em attributes} & dictionnary of attributes \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespace_model_ae1a09aa6b63f2f78d94642ae7bf569f1}\label{namespace_model_ae1a09aa6b63f2f78d94642ae7bf569f1}} 
+\index{Model@{Model}!AdjancenceRelation@{AdjancenceRelation}}
+\index{AdjancenceRelation@{AdjancenceRelation}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{AdjancenceRelation()}{AdjancenceRelation()}}
+{\footnotesize\ttfamily def Model.\+Adjancence\+Relation (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{vertice }\end{DoxyParamCaption})}
+
+
+
+Create edge when two elements are neigbors. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertice} & vertice tested \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{namespace_model_a8de20f9202b9381c347350cd4f1e3d9c}\label{namespace_model_a8de20f9202b9381c347350cd4f1e3d9c}} 
+\index{Model@{Model}!createEdges@{createEdges}}
+\index{createEdges@{createEdges}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{createEdges()}{createEdges()}}
+{\footnotesize\ttfamily def Model.\+create\+Edges (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Create the edges of the graphs. 
+
+A edge represents to a relation between two elements. Here, they are \char`\"{}adjacence\char`\"{} and \char`\"{}inclusion\char`\"{} relation \mbox{\Hypertarget{namespace_model_ab5a1b37259893ca0b7353efed12b4cf2}\label{namespace_model_ab5a1b37259893ca0b7353efed12b4cf2}} 
+\index{Model@{Model}!createGraph@{createGraph}}
+\index{createGraph@{createGraph}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{createGraph()}{createGraph()}}
+{\footnotesize\ttfamily def Model.\+create\+Graph (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Graph methods. 
+
+Create graph that match to raster \mbox{\Hypertarget{namespace_model_a083e065ca591a5b209217e5c267d7d8e}\label{namespace_model_a083e065ca591a5b209217e5c267d7d8e}} 
+\index{Model@{Model}!createVertices@{createVertices}}
+\index{createVertices@{createVertices}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{createVertices()}{createVertices()}}
+{\footnotesize\ttfamily def Model.\+create\+Vertices (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Create the vertices of the graph. 
+
+\mbox{\Hypertarget{namespace_model_aa9893f20932e5bc25b0084e90c8d41e3}\label{namespace_model_aa9893f20932e5bc25b0084e90c8d41e3}} 
+\index{Model@{Model}!exportScene@{exportScene}}
+\index{exportScene@{exportScene}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{exportScene()}{exportScene()}}
+{\footnotesize\ttfamily def Model.\+export\+Scene (\begin{DoxyParamCaption}\item[{}]{self }\end{DoxyParamCaption})}
+
+
+
+Export the raster on a text file. 
+
+\mbox{\Hypertarget{namespace_model_abc10cbe4178325ea4ca03128c27bd310}\label{namespace_model_abc10cbe4178325ea4ca03128c27bd310}} 
+\index{Model@{Model}!has\_node@{has\_node}}
+\index{has\_node@{has\_node}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{has\_node()}{has\_node()}}
+{\footnotesize\ttfamily def Model.\+has\+\_\+node (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{attributes }\end{DoxyParamCaption})}
+
+
+
+Test if the graph has a node with specific attributes (only name, x, y) 
+
+
+\begin{DoxyParams}{Parameters}
+{\em attributes} & attributes tested (name, x, y) \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\+: Yes if a node exist, otherwise no 
+\end{DoxyReturn}
+\mbox{\Hypertarget{namespace_model_a8cd0d716538be2704b5120b6db3539fc}\label{namespace_model_a8cd0d716538be2704b5120b6db3539fc}} 
+\index{Model@{Model}!InclusionRelation@{InclusionRelation}}
+\index{InclusionRelation@{InclusionRelation}!Model@{Model}}
+\doxysubsubsection{\texorpdfstring{InclusionRelation()}{InclusionRelation()}}
+{\footnotesize\ttfamily def Model.\+Inclusion\+Relation (\begin{DoxyParamCaption}\item[{}]{self,  }\item[{}]{vertice }\end{DoxyParamCaption})}
+
+
+
+Create edge when one element is include in onother. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em vertice} & vertice tested \\
+\hline
+\end{DoxyParams}
