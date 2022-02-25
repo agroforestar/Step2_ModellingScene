@@ -29,7 +29,7 @@ class Representation:
                         if str(set(typeElement)) in self.colorComposed.keys():
                             self.writeImage.point([i, j], self.colorComposed[str(set(typeElement))])
                         else:
-                            self.colorComposed[str(set(typeElement))] = (70,70,70)
+                            self.colorComposed[str(set(typeElement))] = (62,62,255)
                             self.writeImage.point([i, j], self.colorComposed[str(set(typeElement))])
 
     def printRepresentation(self):
