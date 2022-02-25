@@ -190,7 +190,11 @@ class Model:
         f = open("output.txt", "w")
         inScene = self.getAllelementsInScene()
         for e in inScene:
-            f.write(repr(e)+";"+str(e.X)+";"+str(e.Y)+"\n")
+            print(type(e))
+            if issubclass(type(e), Plant):
+                f.write(e.EPPO+";"+str(e.X)+";"+str(e.Y)+"\n")
+            else:
+                f.write(repr(e) + ";" + str(e.X) + ";" + str(e.Y) + "\n")
         f.close()
 
     def __repr__(self):

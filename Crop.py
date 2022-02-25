@@ -1,9 +1,9 @@
 from Plant import Plant
 
 class Crop(Plant):
-    def __init__(self, specie, Xcoord, Ycoord):
-        super().__init__(specie, Xcoord, Ycoord)
-        self.color = (0,125,125)
+    def __init__(self, specie, Xcoord, Ycoord, eppo):
+        super().__init__(specie, Xcoord, Ycoord, eppo)
+        self.color = (125,125,0)
 
     def __repr__(self):
-        return "Crop"
+        return self.specie

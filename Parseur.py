@@ -54,9 +54,9 @@ class Parseur:
             if element_name in config["link"].keys():
                 code_EPPO = config["link"][element_name]
                 if code_EPPO in self.tree:
-                    plants.append(Tree(self.tree[code_EPPO], element[2], element[3]))
+                    plants.append(Tree(self.tree[code_EPPO]["name"], element[2], element[3], code_EPPO))
                 elif code_EPPO in self.crop:
-                    plants.append(Crop(self.crop[code_EPPO], element[2], element[3]))
+                    plants.append(Crop(self.crop[code_EPPO]["name"], element[2], element[3], code_EPPO))
             else:
                     plants.append(Plant("Unknow", element[2], element[3]))
         fichier.close()
@@ -72,7 +72,7 @@ class Parseur:
         data = json.load(fichier)
         size = data["Scene_size"]
         self.color = data["color"]
-        self.tree = data["plants"]["tree"]
-        self.crop = data["plants"]["crop"]
+        self.tree = data["plants"]["point"]
+        self.crop = data["plants"]["area"]
         fichier.close()
         return size

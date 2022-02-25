@@ -96,9 +96,9 @@ def findLines(listTree: list, terrain: np.array) -> list[list]:
 def Affichage(graph: Graph):
     layout = graph.layout("kk")
     graph.vs["label"] = graph.vs["name"]
-    color_dict = {"Tree": "blue", "IUGRE": "Forestgreen", "Crop": "yellow", "Line": "darkgreen", "Banc": "brown",
-                  "Plant": "darkgreen", None: "grey"}
-    graph.vs["color"] = [color_dict[name] for name in graph.vs["name"]]
+   # color_dict = {"Tree": "blue", "IUGRE": "Forestgreen", "Crop": "yellow", "Line": "darkgreen", "Banc": "brown",
+    #              "Plant": "darkgreen", None: "grey"}
+    #graph.vs["color"] = [color_dict[name] for name in graph.vs["name"]]
     plot(graph, layout=layout)
 
 

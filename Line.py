@@ -12,7 +12,7 @@ class Line:
                 listPoints[-1].Y - listPoints[0].Y]
         self.length = vector / np.linalg.norm(vector)
         self.points = listPoints
-        self.color = (255,0,0)
+        self.color = (62,62,62)
 
     def __repr__(self):
         return "Line"
